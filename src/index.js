@@ -3,6 +3,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 require("./db/db");
 const ejs = require("express-ejs-layouts");
+require("dotenv").config();
 
 app.use(cookieParser());
 app.use(express.json());
@@ -19,6 +20,6 @@ app.use(userRouter);
 app.use(taskRouter);
 app.use(mainRouter);
 
-app.listen(3000, () => {
-  console.log("Server is live on port 3000");
+app.listen(process.env.PORT, () => {
+  console.log(`Server is live on port ${process.env.PORT}`);
 });
