@@ -10,13 +10,11 @@ const userRouter = require("./src/routes/user");
 const appRouter = require("./src/routes/app");
 const postRouter = require("./src/routes/post")
 const commentRouter = require("./src/routes/comment")
-const uploadRouter = require("./src/routes/upload");
 
 app.use(userRouter);
 app.use(appRouter);
 app.use(postRouter);
 app.use(commentRouter)
-app.use(uploadRouter)
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is up on port ${process.env.PORT}`);
