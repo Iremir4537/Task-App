@@ -1,11 +1,14 @@
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
+const fileupload = require("express-fileupload");
 require("dotenv").config();
 require("./src/db/db.js");
 
 app.use(express.json());
 app.use(cookieParser())
+app.use(fileupload());
+
 const userRouter = require("./src/routes/user");
 const appRouter = require("./src/routes/app");
 const postRouter = require("./src/routes/post")

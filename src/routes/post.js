@@ -4,14 +4,16 @@ const Post = require("../models/post")
 const ObjectId = require("mongodb").ObjectId
 const User = require("../models/user");
 const getUser = require("../middleware/getUser");
+const {uploadImage,downloadImage} = require("../middleware/image")
 const { Error } = require("mongoose");
 const user = require("../models/user");
 
-router.post("/api/post/post",getUser ,async (req,res) => {
+
+router.post("/api/post/post",[getUser,uploadImage] ,async (req,res) => {
     try {
         const post = new Post({
             title: req.body.title,
-            image: req.body.image,
+            image: req.imgUrl,
             postHtml: req.body.postHtml,
             postedBy: req.user._id,
             likeCount:0
@@ -19,6 +21,7 @@ router.post("/api/post/post",getUser ,async (req,res) => {
         await post.save();
         res.send(post)
     } catch (e) {
+        console.log(e);
         res.send({error: "Something went wrong please try again!"})
     }
 })
